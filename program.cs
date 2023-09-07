@@ -1,22 +1,43 @@
-﻿// Задача 64: Задайте значение N. Напишите программу, 
-// которая выведет все натуральные числа в промежутке от N до 1. 
-// Выполнить с помощью рекурсии.
-// N = 5 -> "5, 4, 3, 2, 1"
-// N = 8 -> "8, 7, 6, 5, 4, 3, 2, 1"
+﻿// Задача 66: Задайте значения M и N. 
+// Напишите программу, которая найдёт сумму натуральных элементов в промежутке от M до N.
+// M = 1; N = 15 -> 120
+// M = 4; N = 8. -> 30
 
 
-Console.WriteLine("Введите натуральное число больше 1:");
-int counter = Math.Abs(Convert.ToInt32(Console.ReadLine())); //Исключим ввод отрицательного числа через Math.Abs
-if (counter == 0) { Console.WriteLine("Вы ввели не натуральное число!");} // Исключим ввод ноля
+Console.Write("Введите начальное целое число M нижнего дипазона значений: ");
+int M = Convert.ToInt32(Console.ReadLine());
+
+if (M < 1) M = 1;
+
+Console.Write("Введите конечное целое число N верхнего дипазона значений: ");
+int N = Convert.ToInt32(Console.ReadLine());
+
+if (N < 1)
+{
+    Console.Write("В заданном Вами диапазоне отсутствуют натуральные числа");
+}
 else
 {
-    // Метод вывода натуральных чисел от N до 1:
-    void NumberCounter(int counter)
+
+    SumFromMToN(M, N);
+
+    // вызов функции "сумма чисел от M до N"
+    void SumFromMToN(int m, int n)
     {
-        if (counter == 0) return;
-        Console.Write(counter + " ");
-        NumberCounter(counter - 1);
+        Console.Write("Сумма натуральных чисел в заданном диапазоне: " + SumMN(M - 1, N));
     }
 
-    NumberCounter(counter);
+    // функция сумма чисел от M до N
+    int SumMN(int M, int N)
+    {
+        int result = M;
+        if (M == N)
+            return 0;
+        else
+        {
+            M++;
+            result = M + SumMN(M, N);
+            return result;
+        }
+    }
 }
